@@ -5,11 +5,11 @@
   <groupId>org.dataaccessioner</groupId>
   <artifactId>dataaccessioner</artifactId>
   <packaging>jar</packaging>
-  <version>1.1</version>
+  <version>1.2-SNAPSHOT</version>
 
   <name>dataaccessioner</name>
   <description>Java GUI application to migrate, analyze, and generate metadata from raw files for the purposes of digital preservation</description>
-  <url>http://dataaccessioner.org/</url>
+  <url>https://github.com/DataAccessioner/DataAccessioner</url>
 
   <developers>
     <developer>
@@ -25,16 +25,10 @@
   </developers>
 
   <scm>
-    <url>https://github.com/seth-shaw/dataaccessioner</url>
-    <connection>scm:git:git://github.com/seth-shaw/dataaccessioner.git</connection>
-    <developerConnection>scm:git:git@github.com:seth-shaw/dataaccessioner.git</developerConnection>
+    <url>https://github.com/DataAccessioner/DataAccessioner</url>
+    <connection>scm:git:git://github.com/DataAccessioner/aataaccessioner.git</connection>
+    <developerConnection>scm:git:git@github.com:DataAccessioner/dataaccessioner.git</developerConnection>
   </scm>
-  <distributionManagement>
-    <repository>
-      <id>dataaccessioner.org</id>
-      <name>Data Accessioner Maven Repository</name>
-    </repository>
-  </distributionManagement>
 
   <properties>
 
@@ -579,31 +573,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <repositories>
-    <repository>
-      <id>dataaccessioner.org</id>
-      <name>Data Accessioner Maven Repository</name>
-      <url>http://www.dataaccessioner.org/maven2</url>
-    </repository>
-    <repository>
-      <id>netbeans</id>
-      <name>NetBeans</name>
-      <url>http://bits.netbeans.org/maven2/</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>opf-dev-mvn</id>
-      <name>opf-dev</name>
-      <url>http://artifactory.opf-labs.org/artifactory/opf-dev</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-
+  
   <build>
     <extensions>
       <extension>
