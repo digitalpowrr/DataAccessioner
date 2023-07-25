@@ -47,7 +47,7 @@
 
     <!-- core dependency versions -->
     <beansbinding.version>1.2.1</beansbinding.version>
-    <netbeans.version>RELEASE82</netbeans.version>
+    <netbeans.version>RELEASE180</netbeans.version>
     <tika.version>1.14</tika.version>
 
     <!-- FITS dependency versions -->
