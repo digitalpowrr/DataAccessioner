@@ -1,0 +1,31 @@
+Making check in src
+make[1]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03/src' wordt binnengegaan
+make[1]: Er is niets te doen voor 'check'.
+make[1]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03/src' wordt verlaten
+Making check in magic
+make[1]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03/magic' wordt binnengegaan
+make[1]: Er is niets te doen voor 'check'.
+make[1]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03/magic' wordt verlaten
+Making check in tests
+make[1]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03/tests' wordt binnengegaan
+make.exe  test.exe
+make[2]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03/tests' wordt binnengegaan
+make[2]: 'test.exe' is bijgewerkt.
+make[2]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03/tests' wordt verlaten
+make.exe  check-local
+make[2]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03/tests' wordt binnengegaan
+MAGIC=../magic/magic ./test
+for i in ../../file-5.03-src/tests/*.testfile; do MAGIC=../../file-5.03-src/tests/${i%%.testfile}.magic ../tests/test ../../file-5.03-src/tests/$i ../../file-5.03-src/tests/${i%%.testfile}.result; done
+../../file-5.03-src/tests/../../file-5.03-src/tests/gedcom.testfile: GEDCOM genealogy data version 5.5
+make[2]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03/tests' wordt verlaten
+make[1]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03/tests' wordt verlaten
+Making check in doc
+make[1]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03/doc' wordt binnengegaan
+make[1]: Er is niets te doen voor 'check'.
+make[1]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03/doc' wordt verlaten
+Making check in python
+make[1]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03/python' wordt binnengegaan
+make[1]: Er is niets te doen voor 'check'.
+make[1]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03/python' wordt verlaten
+make[1]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03' wordt binnengegaan
+make[1]: Map '/cygdrive/j/Sysutils/file/5.03/file-5.03' wordt verlaten
