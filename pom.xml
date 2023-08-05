@@ -44,11 +44,17 @@
     <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
     <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
     <maven-shade-plugin.version>3.5.0</maven-shade-plugin.version>
+    <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
 
     <!-- core dependency versions -->
     <beansbinding.version>1.2.1</beansbinding.version>
     <netbeans.version>RELEASE180</netbeans.version>
     <tika.version>2.8.0</tika.version>
+    <fast-md5.version>2.7.1</fast-md5.version>
+    <log4j.version>2.20.0</log4j.version>
+
+    <!-- FITS dependency versions.  These must match the versions of the jars in the FITS lb/ directory -->
+    <fits.version>1.6.0</fits.version>
 
     <!-- test dependency versions -->
     <testng.version>7.8.0</testng.version>
@@ -78,8 +84,23 @@
       <artifactId>tika-app</artifactId>
       <version>${tika.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.joyent.util</groupId>
+      <artifactId>fast-md5</artifactId>
+      <version>${fast-md5.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
 
     <!-- FITS dependencies -->
+    <dependency>
+      <groupId>edu.harvard.huit.lts</groupId>
+      <artifactId>fits</artifactId>
+      <version>${fits.version}</version>
+    </dependency>
 
     <!-- Test dependencies -->
     <dependency>
@@ -166,6 +187,28 @@
             <goals>
               <goal>single</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>${maven-install-plugin.version}</version>
+        <configuration>
+          <groupId>edu.harvard.huit.lts</groupId>
+          <artifactId>fits</artifactId>
+          <version>${fits.version}</version>
+          <packaging>jar</packaging>
+          <file>fits/lib/fits-${fits.version}.jar</file>
+          <generatePom>true</generatePom>
+        </configuration>
+        <executions>
+          <execution>
+            <id>install-local-jar</id>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <phase>validate</phase>
           </execution>
         </executions>
       </plugin>
