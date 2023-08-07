@@ -94,7 +94,7 @@ public class DADroid extends ToolBase {
     /**
      * Make the SAXBuilder available to helper class
      */
-    protected SAXBuilder getSaxBuilder() {
+    public SAXBuilder getSaxBuilder() {
         return saxBuilder;
     }
 
