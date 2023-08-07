@@ -21,8 +21,8 @@ package org.dataaccessioner;
 import edu.harvard.hul.ois.fits.Fits;
 import edu.harvard.hul.ois.fits.exceptions.FitsException;
 import org.apache.commons.cli.*;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.openide.util.Exceptions;
 
 import javax.swing.*;
@@ -47,9 +47,7 @@ public class DataAccessioner {
     private Migrator migrator = new Migrator();
 
     public DataAccessioner() {
-        System.setProperty("log4j.configuration", "tools/log4j.properties");
-        logger = Logger.getLogger(this.getClass());
-        PropertyConfigurator.configure("tools/log4j.properties");
+        logger = LogManager.getLogger(this.getClass());
         logger.info("Starting Data Accessioner application.");
 
         //May eventually setup some other configuration stuff here.

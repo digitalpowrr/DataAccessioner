@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <Appenders>
+    <Console name="STDOUT" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{ISO8601} %5p [%t] %c{1}:%L - %m%n"/>
+    </Console>
+    <RollingFile name="TIME" filename="logs/da.log" filepattern="logs/da-%d{yyyy-MM-dd}.log">
+      <PatternLayout>
+        <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy modulate="true"/>
+      </Policies>
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+    <Logger name="uk.gov.nationalarchives.droid" level="FATAL">
+      <AppenderRef ref="STDOUT"/>
+      <AppenderRef ref="TIME"/>
+    </Logger>
+    <Logger name="edu.harvard.hul.ois.jhove" level="FATAL">
+      <AppenderRef ref="STDOUT"/>
+      <AppenderRef ref="TIME"/>
+    </Logger>
+    <Logger name="org.apache.tika" level="FATAL">
+      <AppenderRef ref="STDOUT"/>
+      <AppenderRef ref="TIME"/>
+    </Logger>
+    <Logger name="edu.harvard.hul.ois.fits" level="INFO">
+      <AppenderRef ref="STDOUT"/>
+      <AppenderRef ref="TIME"/>
+    </Logger>
+    <Root level="INFO">
+      <AppenderRef ref="STDOUT"/>
+      <AppenderRef ref="TIME"/>
+    </Root>
+  </Loggers>
+</Configuration>
