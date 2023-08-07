@@ -19,9 +19,9 @@
 
 package org.dataaccessioner;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.tika.metadata.DublinCore;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.metadata.Property;
@@ -107,9 +107,7 @@ public class MetadataManager {
         this.srcNote = daMetadata.get("aboutSourceNote");
         this.addNote = daMetadata.get("addNote");
 
-        logger = Logger.getLogger(this.getClass());
-        logger.setLevel(Level.INFO);
-        BasicConfigurator.configure();
+        logger = LogManager.getLogger(this.getClass());
         try {
             transformer = new XSLTransformer("xml/metadataManager.xsl");
         } catch (XSLTransformException ex) {
