@@ -7,7 +7,7 @@ import edu.harvard.hul.ois.fits.tools.ToolInfo;
 import edu.harvard.hul.ois.fits.tools.ToolOutput;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jdom.input.SAXBuilder;
+import org.jdom2.input.SAXBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;

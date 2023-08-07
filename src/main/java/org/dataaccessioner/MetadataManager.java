@@ -25,15 +25,15 @@ import org.apache.logging.log4j.Logger;
 import org.apache.tika.metadata.DublinCore;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.metadata.Property;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.Namespace;
-import org.jdom.input.SAXBuilder;
-import org.jdom.output.Format;
-import org.jdom.output.XMLOutputter;
-import org.jdom.transform.XSLTransformException;
-import org.jdom.transform.XSLTransformer;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.Namespace;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
+import org.jdom2.transform.XSLTransformException;
+import org.jdom2.transform.XSLTransformer;
 
 import java.io.*;
 import java.text.DateFormat;
@@ -276,7 +276,7 @@ public class MetadataManager {
             } else {
                 addElement(document.detachRootElement());
             }
-        } catch (org.jdom.JDOMException je) {
+        } catch (org.jdom2.JDOMException je) {
             logger.error("Failed to transform or add FITS XML to metadata.");
             return false;
         }
