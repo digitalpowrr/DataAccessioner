@@ -3,6 +3,7 @@ package org.dataaccessioner.fits.tools;
 import edu.harvard.hul.ois.fits.Fits;
 import edu.harvard.hul.ois.fits.FitsMetadataValues;
 import edu.harvard.hul.ois.fits.exceptions.FitsToolException;
+import edu.harvard.hul.ois.fits.tools.Tool;
 import edu.harvard.hul.ois.fits.tools.ToolOutput;
 import org.jdom2.Attribute;
 import org.jdom2.Document;
@@ -27,9 +28,12 @@ public class DADroidToolOutputter {
     private IdentificationResultCollection results;
     private DADroid toolBase;
 
-    public DADroidToolOutputter (DADroid toolBase, IdentificationResultCollection results) {
+    private Fits fits;
+
+    public DADroidToolOutputter (Fits fits, DADroid toolBase, IdentificationResultCollection results) {
         this.toolBase = toolBase;
         this.results = results;
+        this.fits = fits;
     }
 
     /** Produce a JDOM document with fits as its root element. This
@@ -39,7 +43,8 @@ public class DADroidToolOutputter {
         List<IdentificationResult> resList = results.getResults();
         Document fitsXml = createToolData ();
         Document rawOut = buildRawData (resList);
-        ToolOutput output = new ToolOutput(toolBase,fitsXml,rawOut);
+
+        ToolOutput output = new ToolOutput(toolBase,fitsXml,rawOut,fits);
         return output;
     }
 

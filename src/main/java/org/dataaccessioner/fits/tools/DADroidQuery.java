@@ -39,12 +39,10 @@ public class DADroidQuery {
             throws IOException {
         RequestMetaData metadata = new RequestMetaData(fil.length(), fil.lastModified(), fil.getName());
         RequestIdentifier identifier = new RequestIdentifier (fil.toURI());
-        FileInputStream in = null;
         FileSystemIdentificationRequest req = null;
         try {
             req = new FileSystemIdentificationRequest(metadata, identifier);
-            in = new FileInputStream (fil);
-            req.open(in);
+            req.open(fil.toPath());
             IdentificationResultCollection results;
             results = sigIdentifier.matchBinarySignatures(req);
             if (results.getResults().size() > 1) {
@@ -66,9 +64,6 @@ public class DADroidQuery {
         finally {
             if (req != null) {
                 req.close ();
-            }
-            if (in != null) {
-                in.close();
             }
         }
     }

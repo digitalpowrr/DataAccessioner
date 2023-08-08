@@ -36,6 +36,7 @@ public class DADroid extends ToolBase {
     private DADroidQuery droidQuery;
     private static final Logger logger = LogManager.getLogger(edu.harvard.hul.ois.fits.tools.droid.Droid.class);
     private static String sigFileVersion;
+    private static Fits fits;
     private static BinarySignatureIdentifier sigIdentifier = new BinarySignatureIdentifier();
     private static SignatureFileParser sigFileParser = new SignatureFileParser();
 
@@ -45,7 +46,8 @@ public class DADroid extends ToolBase {
 
         try {
             String droid_conf = Fits.FITS_TOOLS_DIR + "droid" + File.separator;
-            File sigFile = new File(droid_conf + Fits.config.getString("droid_sigfile"));
+            fits = new Fits();
+            File sigFile = new File(droid_conf + fits.getConfig().getString("droid_sigfile"));
             try {
                 logger.debug("Droid Signature File path: '" + sigFile.getAbsolutePath() + "'");
                 droidQuery = new DADroidQuery(sigFile);
@@ -74,7 +76,7 @@ public class DADroid extends ToolBase {
             throw new FitsToolException("DROID can't query file " + file.getAbsolutePath(),
                     e);
         }
-        DADroidToolOutputter outputter = new DADroidToolOutputter(this, results);
+        DADroidToolOutputter outputter = new DADroidToolOutputter(fits, this, results);
         ToolOutput output = outputter.toToolOutput();
 
         duration = System.currentTimeMillis() - startTime;
