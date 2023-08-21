@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.2.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.2.0 http://maven.apache.org/xsd/assembly-2.2.0.xsd">
   <id>dist</id>
   <formats>
     <format>zip</format>
@@ -14,12 +14,8 @@
       <fileMode>0755</fileMode>
     </fileSet>
     <fileSet>
-      <directory>src/main/resources/tools</directory>
-      <outputDirectory>/tools</outputDirectory>
-    </fileSet>
-    <fileSet>
-      <directory>src/main/resources/xml</directory>
-      <outputDirectory>/xml</outputDirectory>
+      <directory>fits</directory>
+      <outputDirectory>fits</outputDirectory>
     </fileSet>
     <fileSet>
       <directory>.</directory>
@@ -31,8 +27,8 @@
   </fileSets>
   <files>
     <file>
-      <source>target/${artifactId}-${version}.${packaging}</source>
-      <outputDirectory>dataaccessioner-${version}</outputDirectory>
+      <source>target/${artifactId}-${version}-jar-with-dependencies.${packaging}</source>
+      <outputDirectory>/</outputDirectory>
       <destName>${artifactId}.${packaging}</destName>
       <fileMode>0755</fileMode>
     </file>
