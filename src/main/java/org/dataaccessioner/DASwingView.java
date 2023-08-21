@@ -907,7 +907,7 @@ public class DASwingView extends javax.swing.JFrame {
                 case 0:
                     return new Date(f.lastModified()); //UPDATE to ISO date/time display
                 case 1:
-                    return new Long(f.length()); //Possible UPDATE to pretty file sizes?
+                    return Long.valueOf(f.length()); //Possible UPDATE to pretty file sizes?
                 default:
                     assert false;
             }
