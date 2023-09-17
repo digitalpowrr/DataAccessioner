@@ -53,6 +53,7 @@
     <log4j.version>2.20.0</log4j.version>
     <jdom2.version>2.0.6.1</jdom2.version>
     <commons-cli.version>1.5.0</commons-cli.version>
+    <commons-coll.version>3.2.2</commons-coll.version>
 
     <!-- FITS dependency versions.  These must match the versions of the jars in the FITS lb/ directory -->
     <fits.version>1.6.0</fits.version>
@@ -118,7 +119,12 @@
       <artifactId>commons-cli</artifactId>
       <version>${commons-cli.version}</version>
     </dependency>
-
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>${commons-coll.version}</version>
+    </dependency>
     <!-- FITS dependencies -->
     <dependency>
       <groupId>edu.harvard.huit.lts</groupId>
