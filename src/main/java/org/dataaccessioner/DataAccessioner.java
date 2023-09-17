@@ -116,7 +116,7 @@ public class DataAccessioner {
                 da.fits = null;
             } else {
                 logger.info("Starting FITS");
-                da.fits = new Fits();
+                da.fits = new Fits("fits");
             }
         } catch (FitsException ex) {
             System.err.println("FITS failed to initialize.");
