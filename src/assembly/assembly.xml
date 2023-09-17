@@ -34,11 +34,11 @@
     </file>
     <file>
       <source>src/main/resources/README.md</source>
-      <outputDirectory>dataaccessioner-${version}</outputDirectory>
+      <outputDirectory>.</outputDirectory>
     </file>
     <file>
       <source>src/main/resources/license.txt</source>
-      <outputDirectory>dataaccessioner-${version}</outputDirectory>
+      <outputDirectory>.</outputDirectory>
     </file>
   </files>
 </assembly>
