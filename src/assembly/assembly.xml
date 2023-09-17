@@ -40,5 +40,9 @@
       <source>src/main/resources/license.txt</source>
       <outputDirectory>.</outputDirectory>
     </file>
+    <file>
+      <source>src/main/resources/da-log-config.xml</source>
+      <outputDirectory>da-log-config.xml</outputDirectory>
+    </file>
   </files>
 </assembly>
