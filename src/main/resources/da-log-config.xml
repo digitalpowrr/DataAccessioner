@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration>
+<Configuration status="DEBUG" name="DataAccessioner">
   <Appenders>
     <Console name="STDOUT" target="SYSTEM_OUT">
       <PatternLayout pattern="%d{ISO8601} %5p [%t] %c{1}:%L - %m%n"/>
     </Console>
-    <RollingFile name="TIME" filename="logs/da.log" filepattern="logs/da-%d{yyyy-MM-dd}.log">
+    <RollingFile name="TIME" fileName="logs/da.log" filePattern="logs/da-%d{yyyy-MM-dd}.log">
       <PatternLayout>
         <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Pattern>
       </PatternLayout>

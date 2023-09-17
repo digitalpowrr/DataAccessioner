@@ -1,4 +1,5 @@
 .*.swp
+logs/
 
 # Maven
 target/
