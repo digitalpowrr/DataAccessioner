@@ -14,8 +14,8 @@
         -->
         <RollingRandomAccessFile
                 name="FILE"
-                fileName="./fits.log"
-                filePattern="./fits-%i.log.gz">
+                fileName="./logs/fits.log"
+                filePattern="./logs/fits-%i.log.gz">
             <PatternLayout>
                 <Pattern>%d{yyyy-MM-dd HH:mm:ss} - %5p - %c{1}:%L - %m%n</Pattern>
             </PatternLayout>
