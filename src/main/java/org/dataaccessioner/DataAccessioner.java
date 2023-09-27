@@ -120,7 +120,7 @@ public class DataAccessioner {
             if (cmd.hasOption("x")) {
                 da.fits = null;
             } else {
-                logger.info("Starting FITS with %s", fitsHome);
+                logger.info("Starting FITS in directory '" + fitsHome + "'");
                 da.fits = new Fits(fitsHome);
             }
         } catch (FitsException ex) {
