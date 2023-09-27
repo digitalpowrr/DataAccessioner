@@ -44,6 +44,7 @@
     <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
     <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
     <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
+    <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
 
     <!-- core dependency versions -->
     <beansbinding.version>1.2.1</beansbinding.version>
@@ -110,6 +111,11 @@
       <version>${log4j.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.jdom</groupId>
       <artifactId>jdom2</artifactId>
       <version>${jdom2.version}</version>
@@ -119,7 +125,6 @@
       <artifactId>commons-cli</artifactId>
       <version>${commons-cli.version}</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections</artifactId>
@@ -130,6 +135,12 @@
       <groupId>edu.harvard.huit.lts</groupId>
       <artifactId>fits</artifactId>
       <version>${fits.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-slf4j-impl</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>uk.gov.nationalarchives</groupId>
@@ -280,6 +291,11 @@
         <version>${maven-surefire-plugin.version}</version>
       </plugin>
       <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>${maven-resources-plugin.version}</version>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>${maven-jar-plugin.version}</version>
@@ -340,7 +356,7 @@
               <artifactId>fits</artifactId>
               <version>${fits.version}</version>
               <packaging>jar</packaging>
-              <file>fits/lib/fits-${fits.version}.jar</file>
+              <file>/home/sprater/Projects/DataAccessioner/fits/fits-1.6.0/lib/fits-${fits.version}.jar</file>
               <generatePom>true</generatePom>
             </configuration>
             <goals>
