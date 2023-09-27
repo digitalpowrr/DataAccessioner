@@ -299,13 +299,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>${maven-jar-plugin.version}</version>
-        <configuration>
-          <archive>
-            <manifestEntries>
-              <Class-Path>fits fits/lib fits/tools fits/xml fits/xml/nlnz</Class-Path>
-            </manifestEntries>
-          </archive>
-        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
