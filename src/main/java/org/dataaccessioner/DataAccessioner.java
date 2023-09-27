@@ -21,8 +21,8 @@ package org.dataaccessioner;
 import edu.harvard.hul.ois.fits.Fits;
 import edu.harvard.hul.ois.fits.exceptions.FitsException;
 import org.apache.commons.cli.*;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openide.util.Exceptions;
 
 import javax.swing.*;
@@ -39,15 +39,16 @@ import java.util.Set;
 public class DataAccessioner {
 
     private static final String NAME = "DataAccessioner";
-    private static final String VERSION = "1.1";
+    private static final String VERSION = "1.2-SNAPSHOT";
     private static Logger logger;
+    private static String fitsHome;
 
     private Fits fits;
     private MetadataManager metadataManager;
     private Migrator migrator = new Migrator();
 
     public DataAccessioner() {
-        logger = LogManager.getLogger(this.getClass());
+        logger = LoggerFactory.getLogger(DataAccessioner.class);
         logger.info("Starting Data Accessioner application.");
 
         //May eventually setup some other configuration stuff here.
@@ -111,12 +112,17 @@ public class DataAccessioner {
             addNote = cmd.getOptionValue("add-note");
         }
 
+        fitsHome = System.getProperty("fits.home");
+        if (fitsHome == null) {
+            fitsHome="fits/fits-1.6.0";
+        }
         try {
             if (cmd.hasOption("x")) {
                 da.fits = null;
             } else {
-                logger.info("Starting FITS");
-                da.fits = new Fits("fits");
+                logger.info("Starting FITS with %s", fitsHome);
+                da.fits = new Fits(fitsHome);
+                System.exit(0);
             }
         } catch (FitsException ex) {
             System.err.println("FITS failed to initialize.");
