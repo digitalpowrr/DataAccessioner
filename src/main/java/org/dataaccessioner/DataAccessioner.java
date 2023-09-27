@@ -114,7 +114,7 @@ public class DataAccessioner {
 
         fitsHome = System.getProperty("fits.home");
         if (fitsHome == null) {
-            fitsHome="fits/fits-1.6.0";
+            fitsHome="fits";
         }
         try {
             if (cmd.hasOption("x")) {
@@ -122,7 +122,6 @@ public class DataAccessioner {
             } else {
                 logger.info("Starting FITS with %s", fitsHome);
                 da.fits = new Fits(fitsHome);
-                System.exit(0);
             }
         } catch (FitsException ex) {
             System.err.println("FITS failed to initialize.");
