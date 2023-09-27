@@ -349,7 +349,7 @@
               <artifactId>fits</artifactId>
               <version>${fits.version}</version>
               <packaging>jar</packaging>
-              <file>/home/sprater/Projects/DataAccessioner/fits/fits-1.6.0/lib/fits-${fits.version}.jar</file>
+              <file>fits/lib/fits-${fits.version}.jar</file>
               <generatePom>true</generatePom>
             </configuration>
             <goals>
