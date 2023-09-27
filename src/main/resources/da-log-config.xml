@@ -18,15 +18,7 @@
       <AppenderRef ref="STDOUT"/>
       <AppenderRef ref="TIME"/>
     </Logger>
-    <Logger name="edu.harvard.hul.ois.jhove" level="FATAL">
-      <AppenderRef ref="STDOUT"/>
-      <AppenderRef ref="TIME"/>
-    </Logger>
     <Logger name="org.apache.tika" level="FATAL">
-      <AppenderRef ref="STDOUT"/>
-      <AppenderRef ref="TIME"/>
-    </Logger>
-    <Logger name="edu.harvard.hul.ois.fits" level="INFO">
       <AppenderRef ref="STDOUT"/>
       <AppenderRef ref="TIME"/>
     </Logger>
