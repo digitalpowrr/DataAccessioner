@@ -20,8 +20,8 @@
 package org.dataaccessioner;
 
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.apache.tika.metadata.DublinCore;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.metadata.Property;
@@ -107,7 +107,7 @@ public class MetadataManager {
         this.srcNote = daMetadata.get("aboutSourceNote");
         this.addNote = daMetadata.get("addNote");
 
-        logger = LogManager.getLogger(this.getClass());
+        logger = LoggerFactory.getLogger(MetadataManager.class);
         try {
             transformer = new XSLTransformer("xml/metadataManager.xsl");
         } catch (XSLTransformException ex) {

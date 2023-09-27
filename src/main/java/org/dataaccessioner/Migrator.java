@@ -22,8 +22,8 @@ import com.twmacinta.util.MD5;
 import edu.harvard.hul.ois.fits.Fits;
 import edu.harvard.hul.ois.fits.FitsOutput;
 import edu.harvard.hul.ois.fits.exceptions.FitsException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.openide.util.Exceptions;
 
 import java.io.*;
@@ -63,7 +63,7 @@ public class Migrator {
     private HashSet excludedItems = new HashSet(); //Hash key is the file's absolute path
 
     public Migrator() {
-        logger = LogManager.getLogger(this.getClass());
+        logger = LoggerFactory.getLogger(Migrator.class);
     }
 
     public void setFits(Fits fits) {
