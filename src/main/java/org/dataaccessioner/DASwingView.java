@@ -1191,16 +1191,16 @@ public class DASwingView extends javax.swing.JFrame {
         versionLbl.setText("Version:");
 
         devLbl.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        devLbl.setText("Developer:");
+        //devLbl.setText("Developer:");
 
         urlLbl.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         urlLbl.setText("Website:");
 
         versionVal.setText(da.getVersion());
 
-        devVal.setText("Seth Shaw");
+        //devVal.setText("Seth Shaw");
 
-        urlVal.setText("http://www.dataaccessioner.org");
+        urlVal.setText("https://github.com/DataAccessioner/DataAccessioner");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
