@@ -1,0 +1,195 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>edu.harvard.huit.lts</groupId>
+    <artifactId>fits-parent</artifactId>
+    <version>1.6.0</version>
+    <packaging>pom</packaging>
+
+    <name>FITS Parent</name>
+    <description>FITS Parent POM</description>
+    <url>https://fitstool.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>11</java.version>
+        <java.target>11</java.target>
+        <bcmail.version>132</bcmail.version>
+        <log4j.version>2.19.0</log4j.version>
+        <slf4j.version>1.7.36</slf4j.version>
+        <jdom2.version>2.0.6.1</jdom2.version>
+        <woodstox.version>4.4.1</woodstox.version>
+        <xmlunit.version>1.6</xmlunit.version>
+        <stax2.version>4.2.1</stax2.version>
+        <staxmate.version>2.0.1</staxmate.version>
+        <junit.version>4.13.2</junit.version>
+        <commons-lang.version>2.6</commons-lang.version>
+        <commons-logging.version>1.2</commons-logging.version>
+        <commons-collections.version>3.2.2</commons-collections.version>
+        <commons-io.version>2.11.0</commons-io.version>
+        <commons-cli.version>1.5.0</commons-cli.version>
+        <commons-configuration.version>1.10</commons-configuration.version>
+        <ots-schemas.version>1.0.62</ots-schemas.version>
+        <jna.version>5.9.0</jna.version>
+        <hclaps.version>2.2.0</hclaps.version>
+        <fast-md5.version>2.7.1</fast-md5.version>
+        <aes31.version>31.4.0</aes31.version>
+        <gson.version>2.10</gson.version>
+        <nzmetool.version>3.6GA</nzmetool.version>
+        <xerces-impl.version>2.12.2</xerces-impl.version>
+        <xml-apis.version>1.4.01</xml-apis.version>
+        <saxon.version>11.4</saxon.version>
+        <embarc.version>0.2</embarc.version>
+
+        <!-- Tool properties -->
+        <tika.version>2.6.0</tika.version>
+        <tika.dir>lib/tika</tika.dir>
+        <droid.version>6.5.2</droid.version>
+        <droid.dir>lib/droid</droid.dir>
+        <jhove.version>1.26.1</jhove.version>
+        <jhove.dir>lib/jhove</jhove.dir>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <!-- These modules are used to pull in the tools -->
+                <module>tool-poms/tika-pom.xml</module>
+                <module>tool-poms/droid-pom.xml</module>
+                <module>tool-poms/jhove-pom.xml</module>
+                <module>tool-poms/tool-installer-pom.xml</module>
+                <!-- This is the main FITS pom -->
+                <module>fits-pom.xml</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>update-droid-sigs</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>tool-poms/droid-sig-pom.xml</module>
+            </modules>
+        </profile>
+    </profiles>
+
+    <build>
+        <!-- Defines the versions of the plugins that are used in child poms -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.10.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.3.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.4.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.4.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.diffplug.spotless</groupId>
+                    <artifactId>spotless-maven-plugin</artifactId>
+                    <version>2.27.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.3.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>maven-central</id>
+            <name>Maven repo</name>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>local-maven-repo</id>
+            <name>Local file system for temporarily holding non-repo JAR files</name>
+            <url>file://${project.basedir}/lib-local/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven2-repository.dev.java.net</id>
+            <name>Java.net Maven 2 Repository</name>
+            <url>https://repo1.maven.org/maven2/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <!-- repository URL and credentials set up in local .m2/settings.xml -->
+        <repository>
+            <id>harvard-lts-internal-release-repository</id>
+            <name>Harvard LTS internal Release Repository</name>
+            <url>${lts-artifactory-url}/lts-libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>harvard-lts-internal-snapshot-repository</id>
+            <name>Harvard LTS internal Snapshot Repository</name>
+            <url>${lts-artifactory-url}/lts-libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <scm>
+        <connection>scm:git:git@github.com:harvard-lts/fits.git</connection>
+        <developerConnection>scm:git:git@github.com:harvard-lts/fits.git</developerConnection>
+        <url>https://github.com/harvard-lts/fits</url>
+      <tag>1.6.0</tag>
+  </scm>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>David Neiman</name>
+            <email>dneiman@g.harvard.edu</email>
+            <organization>Harvard University Information Technology</organization>
+            <organizationUrl>https://huit.harvard.edu</organizationUrl>
+        </developer>
+        <developer>
+            <name>Spencer McEwen</name>
+            <email>spencer_mcewen@harvard.edu</email>
+            <organization>Harvard University Information Technology</organization>
+            <organizationUrl>https://huit.harvard.edu</organizationUrl>
+        </developer>
+    </developers>
+
+</project>

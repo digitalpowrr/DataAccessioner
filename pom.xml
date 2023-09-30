@@ -59,6 +59,9 @@
     <!-- FITS dependency versions.  These must match the versions of the jars in the FITS lb/ directory -->
     <fits.version>1.6.0</fits.version>
     <droid.version>6.5.2</droid.version>
+    <ots.version>1.0.62</ots.version>
+    <aes.version>31.4.0</aes.version>
+    <hclaps.version>2.2.0</hclaps.version>
 
     <!-- test dependency versions -->
     <testng.version>7.8.0</testng.version>
@@ -350,7 +353,68 @@
               <version>${fits.version}</version>
               <packaging>jar</packaging>
               <file>fits/lib/fits-${fits.version}.jar</file>
-              <generatePom>true</generatePom>
+              <pomFile>src/main/resources/fits-pom.xml</pomFile>
+              <generatePom>false</generatePom>
+            </configuration>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <phase>validate</phase>
+          </execution>
+          <execution>
+            <id>install-fits-parent</id>
+            <configuration>
+              <groupId>edu.harvard.huit.lts</groupId>
+              <artifactId>fits-parent</artifactId>
+              <version>${fits.version}</version>
+              <packaging>pom</packaging>
+              <file>src/main/resources/fits-parent-pom.xml</file>
+              <pomFile>src/main/resources/fits-parent-pom.xml</pomFile>
+            </configuration>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <phase>validate</phase>
+          </execution>
+          <execution>
+            <id>install-ots</id>
+            <configuration>
+              <groupId>edu.harvard.huit.lts</groupId>
+              <artifactId>ots</artifactId>
+              <version>${ots.version}</version>
+              <packaging>jar</packaging>
+              <file>fits/lib/ots-${ots.version}.jar</file>
+              <pomFile>src/main/resources/ots-pom.xml</pomFile>
+            </configuration>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <phase>validate</phase>
+          </execution>
+          <execution>
+            <id>install-aes</id>
+            <configuration>
+              <groupId>edu.harvard.lts.tools</groupId>
+              <artifactId>aes</artifactId>
+              <version>${aes.version}</version>
+              <packaging>jar</packaging>
+              <file>fits/lib/aes-${aes.version}.jar</file>
+              <pomFile>src/main/resources/aes-pom.xml</pomFile>
+            </configuration>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <phase>validate</phase>
+          </execution>
+          <execution>
+            <id>install-hclaps</id>
+            <configuration>
+              <groupId>edu.harvard.lts.tools</groupId>
+              <artifactId>hclaps</artifactId>
+              <version>${hclaps.version}</version>
+              <packaging>jar</packaging>
+              <file>fits/lib/hclaps-${hclaps.version}.jar</file>
+              <pomFile>src/main/resources/hclaps-pom.xml</pomFile>
             </configuration>
             <goals>
               <goal>install-file</goal>
