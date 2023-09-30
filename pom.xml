@@ -48,7 +48,7 @@
 
     <!-- core dependency versions -->
     <beansbinding.version>1.2.1</beansbinding.version>
-    <netbeans.version>RELEASE180</netbeans.version>
+    <netbeans.version>RELEASE190</netbeans.version>
     <tika.version>2.8.0</tika.version>
     <fast-md5.version>2.7.1</fast-md5.version>
     <log4j.version>2.20.0</log4j.version>
@@ -142,6 +142,10 @@
         <exclusion>
           <groupId>org.apache.logging.log4j</groupId>
           <artifactId>log4j-slf4j-impl</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.json</groupId>
+          <artifactId>json</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -273,6 +277,13 @@
       <artifactId>testng</artifactId>
       <version>${testng.version}</version>
       <scope>test</scope>
+      <!-- Exclude vulnerable transitive dependencies -->
+      <exclusions>
+        <exclusion>
+          <groupId>org.webjars</groupId>
+          <artifactId>jquery</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 
@@ -425,5 +436,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>
