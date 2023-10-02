@@ -203,7 +203,7 @@ public class DASwingView extends javax.swing.JFrame {
     private void initComponents() {
         this.setTitle(da.getName()+" v. "+da.getVersion());
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        Dimension preferredSize = new Dimension(500,768);
+        Dimension preferredSize = new Dimension(768,768);
         this.setPreferredSize(preferredSize);
         this.setSize(preferredSize);
 
@@ -254,6 +254,19 @@ public class DASwingView extends javax.swing.JFrame {
         });
         fileMenu.add(exitMI);
         menuBar.add(fileMenu);
+
+        List<edu.harvard.hul.ois.fits.tools.Tool> broken_tools = new ArrayList();
+        for (edu.harvard.hul.ois.fits.tools.Tool tool : da.getFits().getToolbelt().getTools()) {
+            String version = tool.getToolInfo().getVersion();
+            if (version.equals("[could not launch tool]")) {
+                broken_tools.add(tool);
+            }
+        }
+
+        for (edu.harvard.hul.ois.fits.tools.Tool broken_tool : broken_tools) {
+            da.getFits().getToolbelt().getTools().remove(broken_tool);
+        }
+
         for (edu.harvard.hul.ois.fits.tools.Tool tool : da.getFits().getToolbelt().getTools()) {
             ItemListener toolsListener = new ItemListener() {
                 @Override
