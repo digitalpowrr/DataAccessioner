@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fits="http://hul.harvard.edu/ois/xml/ns/fits/fits_output" xmlns:uuid="java:java.util.UUID" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fits="http://hul.harvard.edu/ois/xml/ns/fits/fits_output" xmlns:da="http://dataaccessioner.org/saxon-extension" version="2.0">
   <xsl:template match="/">
     <premis:object xmlns:premis="info:lc/xmlns/premis-v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="premis:file">
       <premis:objectIdentifier>
         <premis:objectIdentifierType>uuid</premis:objectIdentifierType>
-        <premis:objectIdentifierValue><xsl:value-of select="uuid:randomUUID()"/></premis:objectIdentifierValue>
+        <premis:objectIdentifierValue><xsl:value-of select="da:get-uuid()"/></premis:objectIdentifierValue>
       </premis:objectIdentifier>
       <premis:objectCharacteristics>
         <premis:compositionLevel>0</premis:compositionLevel>

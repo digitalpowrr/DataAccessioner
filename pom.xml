@@ -55,6 +55,7 @@
     <jdom2.version>2.0.6.1</jdom2.version>
     <commons-cli.version>1.5.0</commons-cli.version>
     <commons-coll.version>3.2.2</commons-coll.version>
+    <saxon.version>12.3</saxon.version>
 
     <!-- FITS dependency versions.  These must match the versions of the jars in the FITS lb/ directory -->
     <fits.version>1.6.0</fits.version>
@@ -269,6 +270,11 @@
           <artifactId>derby</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.saxon</groupId>
+      <artifactId>Saxon-HE</artifactId>
+      <version>${saxon.version}</version>
     </dependency>
 
     <!-- Test dependencies -->

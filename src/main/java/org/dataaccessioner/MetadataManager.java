@@ -19,7 +19,17 @@
 
 package org.dataaccessioner;
 
-import org.apache.logging.log4j.Level;
+import net.sf.saxon.TransformerFactoryImpl;
+import net.sf.saxon.expr.XPathContext;
+import net.sf.saxon.lib.ExtensionFunctionCall;
+import net.sf.saxon.lib.ExtensionFunctionDefinition;
+import net.sf.saxon.om.Sequence;
+import net.sf.saxon.om.StructuredQName;
+import net.sf.saxon.trans.XPathException;
+import net.sf.saxon.value.SequenceType;
+import net.sf.saxon.value.StringValue;
+import org.jdom2.transform.JDOMResult;
+import org.jdom2.transform.JDOMSource;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.apache.tika.metadata.DublinCore;
@@ -35,13 +45,15 @@ import org.jdom2.output.XMLOutputter;
 import org.jdom2.transform.XSLTransformException;
 import org.jdom2.transform.XSLTransformer;
 
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -97,7 +109,7 @@ public class MetadataManager {
     public static String getName() {
         return "Full Metadata";
     }
-    private XSLTransformer transformer;
+    private Transformer transformer;
 
     public MetadataManager(File metadataFile, HashMap<String,String> daMetadata) {
         this.metadataFile = metadataFile;
@@ -109,8 +121,10 @@ public class MetadataManager {
 
         logger = LoggerFactory.getLogger(MetadataManager.class);
         try {
-            transformer = new XSLTransformer("xml/metadataManager.xsl");
-        } catch (XSLTransformException ex) {
+            InputStream inp = this.getClass().getClassLoader().getResourceAsStream(DEFAULT_XSLT);
+            TransformerFactory tf = getTransformerFactory();
+            transformer = tf.newTransformer(new StreamSource(inp));
+        } catch ( XPathException | TransformerConfigurationException ex) {
             logger.warn("Unable to setup FITS XSLT. Metadata will include full FITS xml.");
         }
     }
@@ -271,15 +285,17 @@ public class MetadataManager {
     public boolean addDocumentXSLT(Document document){
         try {
             if (transformer != null) {
-                Document premis = transformer.transform(document);
-                addElement(premis.detachRootElement());
+                JDOMResult premis = new JDOMResult();
+                transformer.transform(new JDOMSource(document),premis);
+                addElement(premis.getDocument().detachRootElement());
             } else {
                 addElement(document.detachRootElement());
             }
-        } catch (org.jdom2.JDOMException je) {
+        } catch (TransformerException te) {
             logger.error("Failed to transform or add FITS XML to metadata.");
             return false;
         }
+
         return true;
     }
     
@@ -311,5 +327,58 @@ public class MetadataManager {
             }
         }
         currentElement.addContent(dcDescription);
+    }
+
+    // Saxon-HE custom integrated function to return random UUID
+
+    private TransformerFactory getTransformerFactory() throws net.sf.saxon.trans.XPathException {
+        TransformerFactory tFactory = TransformerFactory.newInstance();
+        if(tFactory instanceof TransformerFactoryImpl) {
+            TransformerFactoryImpl tFactoryImpl = (TransformerFactoryImpl) tFactory;
+            net.sf.saxon.Configuration saxonConfig = tFactoryImpl.getConfiguration();
+            saxonConfig.registerExtensionFunction(new XSLuuid());
+        }
+        return tFactory;
+    }
+    public class XSLuuid extends ExtensionFunctionDefinition {
+
+        private final SequenceType[] argumentTypes = new SequenceType[]{};
+
+        @Override
+        public StructuredQName getFunctionQName() {
+            return new StructuredQName("da", "http://dataaccessioner.org/saxon-extension", "get-uuid");
+        }
+
+        @Override
+        public SequenceType[] getArgumentTypes() {
+            return argumentTypes;
+        }
+
+        public int getMinimumNumberOfArguments() {
+            return 0;
+        }
+
+        @Override
+        public int getMaximumNumberOfArguments() {
+            return 0;
+        }
+
+        @Override
+        public SequenceType getResultType(SequenceType[] suppliedArgumentTypes) {
+            return SequenceType.SINGLE_STRING;
+        }
+
+        @Override
+        public ExtensionFunctionCall makeCallExpression() {
+            return new CreateUUID();
+        }
+    }
+    private class CreateUUID extends ExtensionFunctionCall {
+
+        @Override
+        public Sequence call(XPathContext xPathContext, Sequence[] arguments) throws XPathException {
+            UUID uuid = UUID.randomUUID();
+            return StringValue.makeStringValue(uuid.toString());
+        }
     }
 }
