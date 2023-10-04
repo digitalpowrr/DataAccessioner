@@ -56,6 +56,7 @@
     <commons-cli.version>1.5.0</commons-cli.version>
     <commons-coll.version>3.2.2</commons-coll.version>
     <saxon.version>12.3</saxon.version>
+    <stax2.version>4.2.1</stax2.version>
 
     <!-- FITS dependency versions.  These must match the versions of the jars in the FITS lb/ directory -->
     <fits.version>1.6.0</fits.version>
@@ -134,6 +135,11 @@
       <artifactId>commons-collections</artifactId>
       <version>${commons-coll.version}</version>
     </dependency>
+    <dependency>
+      <groupId>net.sf.saxon</groupId>
+      <artifactId>Saxon-HE</artifactId>
+      <version>${saxon.version}</version>
+    </dependency>
     <!-- FITS dependencies -->
     <dependency>
       <groupId>edu.harvard.huit.lts</groupId>
@@ -147,6 +153,10 @@
         <exclusion>
           <groupId>org.json</groupId>
           <artifactId>json</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.codehaus.woodstox</groupId>
+          <artifactId>stax2-api</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -272,9 +282,9 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>net.sf.saxon</groupId>
-      <artifactId>Saxon-HE</artifactId>
-      <version>${saxon.version}</version>
+      <groupId>org.codehaus.woodstox</groupId>
+      <artifactId>stax2-api</artifactId>
+      <version>${stax2.version}</version>
     </dependency>
 
     <!-- Test dependencies -->
