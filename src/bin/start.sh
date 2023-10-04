@@ -1,3 +1,3 @@
 #!/bin/sh
 cd "$(dirname "$0")"
-java -Xmx512m -jar dataaccessioner.jar
+java -Dlog4j.configurationFile=da-log-config.xml -Xmx1024m -jar dataaccessioner.jar
