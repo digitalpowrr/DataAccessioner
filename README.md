@@ -14,7 +14,7 @@ of migration.
 
 ## Build prerequisites
 
-  * A recent version of Java (>= 1.8)
+  * A recent version of Java (>= 11)
   * Perl (for exiftool)
   * Maven (>= 3.0)
 
@@ -24,15 +24,22 @@ Data Accessioner (>= 1.1) is built using Maven.  To build, clone the
 repository, then execute the following command in the top-level
 directory:
 
+    mvn validate
+
+This only needs to be run once, the first time you build the package.
+This command copies local FITS jars into your local maven repository.
+
+To build the package:
+
     mvn clean package
 
 A distributable zip file will be built and placed in the `target/`
 subdirectory, with the name `dataaccessioner-<version>-dist.zip`.
 
 For testing purposes, you may run the created jar in the `target/`
-folder directly, first setting the FITS_HOME environment variable:
+folder directly:
 
-    FITS_HOME=src/main/resources java -jar target/dataaccessioner-1.1.jar
+    FITS_HOME=src/main/resources java -jar target/dataaccessioner-1.2-jar-with-dependencies.jar
 
 ## Install
 
@@ -41,7 +48,13 @@ All dependencies are included within the package.
 
 ## Run
 
-Run `start.sh` or `start.bat` in the install directory.
+Mac and Linux:
+
+Run `start.sh` in the install directory.
+
+Windows:
+
+Run `start.bat` in the install directory, or double-click the `dataaccessioner` icon.
 
 ## Contributing
 
@@ -59,9 +72,9 @@ auspices of Duke University Archives in early 2008. In January
 revised architecture, and the metadata tool adapters and the 
 custom metadata manager were extracted to be used as plugins.
 
-Versions 0.3.1 and 1.0 were made possible by the POWRR Project
-(<http://digitalpowrr.niu.edu/>);  at that point, the tool became
-an open source application, unaffiliated to any institution.  
+Versions 0.3.1 and 1.0 were made possible by the Digital POWRR 
+Project (<http://digitalpowrr.niu.edu/>);  at that point, the tool 
+became an open source application, unaffiliated to any institution.  
 Version 1.0 is the first version to use FITS as a metadata tool 
 wrapper.
 
@@ -69,6 +82,11 @@ Version 1.1 was made possible by The Archives of the Episcopal
 Church (http://www.episcopalarchives.org).  It was refactored 
 to use Maven to manage dependencies, and contains several minor 
 enhancements.
+
+Version 1.2 was made possible by Digital POWRR 
+(https://digitalpowrr.niu.edu). It was updated to clean up several
+security and deprecation vulnerabilities, and the most recent version
+of FITS was included.
 
 ## Credits
 
