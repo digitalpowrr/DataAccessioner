@@ -16,7 +16,7 @@ of migration.
 
   * A recent version of Java (>= 11)
   * Perl (for exiftool)
-  * Maven (>= 3.0)
+  * Maven (>= 3.9)
 
 ## Build
 
