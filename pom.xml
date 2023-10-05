@@ -10,6 +10,10 @@
   <name>dataaccessioner</name>
   <description>Java GUI application to migrate, analyze, and generate metadata from raw files for the purposes of digital preservation</description>
   <url>https://github.com/DataAccessioner/DataAccessioner</url>
+  <organization>
+    <name>DataAccessioner</name>
+  </organization>
+  <inceptionYear>2008</inceptionYear>
 
   <developers>
     <developer>
@@ -45,6 +49,7 @@
     <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
     <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
     <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+    <launch4j.version>2.4.1</launch4j.version>
 
     <!-- core dependency versions -->
     <beansbinding.version>1.2.1</beansbinding.version>
@@ -68,7 +73,6 @@
     <!-- test dependency versions -->
     <testng.version>7.8.0</testng.version>
   </properties>
-
 
   <dependencies>
 
@@ -330,13 +334,45 @@
         <artifactId>maven-jar-plugin</artifactId>
         <version>${maven-jar-plugin.version}</version>
       </plugin>
+      <!-- Third party launch4j plugin to build a windows executable -->
+      <plugin>
+        <groupId>com.akathist.maven.plugins.launch4j</groupId>
+        <artifactId>launch4j-maven-plugin</artifactId>
+        <version>${launch4j.version}</version>
+        <executions>
+          <execution>
+            <id>windows-exe</id>
+            <phase>package</phase>
+            <goals>
+              <goal>launch4j</goal>
+            </goals>
+            <configuration>
+              <headerType>gui</headerType>
+              <outfile>target/dataaccessioner.exe</outfile>
+              <jar>target/dataaccessioner-${project.version}-jar-with-dependencies.jar</jar>
+              <icon>src/main/resources/dataaccessioner.ico</icon>
+              <jre>
+                <minVersion>11</minVersion>
+                <path>%JAVA_HOME%;%PATH%</path>
+                <maxHeapSize>1024</maxHeapSize>
+                <opts>
+                  <opt>-Dlog4j.configurationFile=da-log-config.xml</opt>
+                </opts>
+              </jre>
+              <versionInfo>
+                <fileVersion>1.2.0.0</fileVersion>
+              </versionInfo>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>${maven-assembly-plugin.version}</version>
         <executions>
           <execution>
             <id>jar-with-dependencies</id>
-            <phase>package</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>single</goal>
             </goals>
