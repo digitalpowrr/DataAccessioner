@@ -12,14 +12,30 @@ It provides a a wrapper around the FITS toolkit
 metadata tools to analyze and describe found content at the time 
 of migration.
 
-## Build prerequisites
+## Install
 
-  * A recent version of Java (>= 11)
-  * Perl (for exiftool)
-  * Maven (>= 3.9)
+Unzip the distribution zip file in the location of your choice.
+All dependencies are included within the package.
 
-## Build
+## Run
 
+Mac and Linux:
+
+Run `start.sh` in the install directory.
+
+Windows:
+
+Run `start.bat` in the install directory, or double-click the `dataaccessioner` icon.
+
+## For Developers
+
+### Build prerequisites
+
+* A recent version of Java (>= 11)
+* Perl (for exiftool)
+* Maven (>= 3.9)
+
+### Build 
 Data Accessioner (>= 1.1) is built using Maven.  To build, clone the
 repository, then execute the following command in the top-level
 directory:
@@ -39,24 +55,9 @@ subdirectory, with the name `dataaccessioner-<version>-dist.zip`.
 For testing purposes, you may run the created jar in the `target/`
 folder directly:
 
-    FITS_HOME=src/main/resources java -jar target/dataaccessioner-1.2-jar-with-dependencies.jar
+    FITS_HOME=fits/ java -jar target/dataaccessioner-1.2-jar-with-dependencies.jar
 
-## Install
-
-Unzip the distribution zip file in the location of your choice.
-All dependencies are included within the package.
-
-## Run
-
-Mac and Linux:
-
-Run `start.sh` in the install directory.
-
-Windows:
-
-Run `start.bat` in the install directory, or double-click the `dataaccessioner` icon.
-
-## Contributing
+### Contributing
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
