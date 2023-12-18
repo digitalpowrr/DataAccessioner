@@ -1,5 +1,3 @@
-**Note:** *As of the beginning of 2023 the Data Accessioner project no longer has any active developers maintaining it.*
-
 # Data Accessioner
 
 The DataAccessioner is a simple Java Swing GUI to allow archivists 
@@ -7,10 +5,21 @@ and digital preservationists to migrate data off disks and onto a
 file server for basic preservation, further appraisal, arrangement, 
 and description.
 
-It provides a a wrapper around the FITS toolkit 
+It provides a wrapper around the FITS toolkit 
 (<http://projects.iq.harvard.edu/fits/home>) to integrate common 
 metadata tools to analyze and describe found content at the time 
 of migration.
+
+DataAccessioner 1.2 requires Java 11 or above.
+
+Jpylyzer requires Windows and Python.
+
+MediaInfo for Linux is installed for Ubuntu.  If you are running a
+different version of LInux and MediaInfo does not, work, see the FITS FAQ
+for more information on installing MediaInfo for other versions of Linux.
+
+https://projects.iq.harvard.edu/fits/fitsfaq
+
 
 ## Install
 
@@ -19,13 +28,9 @@ All dependencies are included within the package.
 
 ## Run
 
-Mac and Linux:
-
-Run `start.sh` in the install directory.
-
-Windows:
-
-Run `start.bat` in the install directory, or double-click the `dataaccessioner` icon.
+Double-click the `dataaccessioner.jar` file in the install directory or 
+run `start.sh` (Mac and Linux) or `start.bat` (Windows) in the install 
+directory to launch the application.
 
 ## For Developers
 

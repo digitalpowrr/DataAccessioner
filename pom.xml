@@ -334,38 +334,6 @@
         <artifactId>maven-jar-plugin</artifactId>
         <version>${maven-jar-plugin.version}</version>
       </plugin>
-      <!-- Third party launch4j plugin to build a windows executable -->
-      <plugin>
-        <groupId>com.akathist.maven.plugins.launch4j</groupId>
-        <artifactId>launch4j-maven-plugin</artifactId>
-        <version>${launch4j.version}</version>
-        <executions>
-          <execution>
-            <id>windows-exe</id>
-            <phase>package</phase>
-            <goals>
-              <goal>launch4j</goal>
-            </goals>
-            <configuration>
-              <headerType>gui</headerType>
-              <outfile>target/dataaccessioner.exe</outfile>
-              <jar>target/dataaccessioner-${project.version}-jar-with-dependencies.jar</jar>
-              <icon>src/main/resources/dataaccessioner.ico</icon>
-              <jre>
-                <minVersion>11</minVersion>
-                <path>%JAVA_HOME%;%PATH%</path>
-                <maxHeapSize>1024</maxHeapSize>
-                <opts>
-                  <opt>-Dlog4j.configurationFile=da-log-config.xml</opt>
-                </opts>
-              </jre>
-              <versionInfo>
-                <fileVersion>1.2.0.0</fileVersion>
-              </versionInfo>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>${maven-assembly-plugin.version}</version>
