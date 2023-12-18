@@ -406,6 +406,8 @@
           </execution>
         </executions>
       </plugin>
+
+      <!-- Local jars to install to local maven repo -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-install-plugin</artifactId>

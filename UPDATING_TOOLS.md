@@ -1,36 +1,38 @@
 Updating FITS for Data Accessioner
 ==================================
 
-*Last update:  Feb. 3, 2017*
+*Last update:  Oct. 2, 2023*
 
-Data Accessioner is basically a Java GUI wrapped around FITS 
-(the Harvard *File Information Tool Set*);  FITS itself is a
-wrapper around a number of open source file identification
-toolkits.
+Data Accessioner is a Java GUI wrapped around FITS (the Harvard 
+*File Information Tool Set*);  FITS itself is a wrapper around a 
+number of open source file identification toolkits.
 
 Data Accessioner:  http://www.dataaccessioner.org/
 
 FITS:  http://projects.iq.harvard.edu/fits/home
 
-Data Accessioner (as of version 1.1) contains FITS 1.0.4, with the
+Data Accessioner (as of version 1.2) contains FITS 1.6.0, with the
 following tools enabled:
 
 * ADL Tool
 * WebVTT Tool
 * Droid
-* JHove (version 1.14.7)
+* JHove
+* Jpylyzer
 * File Utility
-* ExifTool (version 10.37)
-* NLNZ Metadata Extractor (version 3.6GA)
+* ExifTool
+* MediaInfo
+* NLNZ Metadata Extractor
 * OIS File Information
 * OIS XML Information
 * OIS File Information
 * FFIdent
 * Apache Tika
 
-All of the tools are the versions distributed with FITS, with the 
-exception of the ones with versions listed above, which have been updated
-for Data Accessioner 1.1.
+Note that Jpylyzer and MediaInfo may not be enabled on all platforms;
+see the FITS documentation for more information on workarounds. If
+a tool cannot be loaded by FITS upon startup, it will not be included
+in the DataAccessioner list of FITS tools.
 
 FITS Tools page:  http://projects.iq.harvard.edu/fits/fits/tools
 
@@ -60,15 +62,27 @@ for more information on configuring FITS.
 
 ## Data Accessioner and FITS
 
-DataAccessioner keeps the FITS `xml/` and `tools/` subdirectories, but
-does not segregate jars files in their own `lib/` directory.  Jar files
-are handled by Maven;  they are downloaded, the duplicates are removed, 
-and the needed jars are included in the dataaccessioner jar file when 
-the application is packaged.
+DataAccessioner contains a complete binary distribution of FITS.  You may
+use another instance of FITS installed on your machine, by setting the
+FITS_HOME environment variable to the path to your local installation of FITS.
+
+Note that if you run DataAccessioner using a different version of FITS at a 
+different location, you may run into version incompatibility issues.  See
+the section on *Dependency Management* to update DataAccessioner to use a 
+different version of FITS.
+
+### FITS Logging
+
+The only file that is modified in the FITS instsall distributed with
+DataAccessioner is the file `fits/log4j2.xml`; it has been changed to log 
+all FITS messages to the console. DataAccessioner also captures and logs 
+output from FITS in the file `logs/da.log`. You may use the default 
+`log4j2.xml` file distributed with FITS, at the expense of some cryptic 
+warning messages and duplicate output in a separate `fits.log` file.
 
 ### Dependency Management with Maven
 
-Building DataAccessioner requires Maven version 3 or above.
+Building DataAccessioner requires Maven version 3.9 or above.
 
 The file `pom.xml` in the source code root contains all the Maven
 dependencies for both Data Accessioner and FITS.
@@ -81,50 +95,14 @@ from the Maven Central Repository.  For many tools and jars,
 simply updating the dependency's version in the `pom.xml` file and 
 rebuilding DataAccessioner will suffice.
 
-However, many of the jars included in FITS are proprietary, of unknown 
-provenance, or older, obsolete versions.  For these, there is a Data
-Accessioner maven repository to host them: http://www.dataaccessioner.org/maven2/
+However, some of the jars used in FITS (including the FITS jar itself)
+are not available from any public repository.  They are distributed with
+FITS itself.  The DataAccessioner POM has an `install` section to install
+these local jars to your local maven repository;  the command
 
-**Uploading a new jar to the DataAccessioner Maven Repository**
+        mvn validate
 
-Maven should be used to deploy jars to the DA Maven Repository.  In 
-order to do that, you'll need ssh access to the dataaccessioner.org 
-host;  Seth Shaw (owner of the Data Accesioner project) can help you 
-get set up.
-
-Before you deploy your first artifact, add the following server stanza 
-to your maven settings file `~/.m2/settings.xml` on the host from which 
-you'll be pushing up the artifacts:
-
-     <server>
-       <id>da.repo</id>
-       <username>someuser_data-accessioner</username>
-       <password>yourpassword</password>
-       <filePermissions>664</filePermissions>
-       <directoryPermissions>775</directoryPermissions>
-     </server>
-
-To upload a jar:
-
-    mvn deploy:deploy-file -DgroupId=org.dataaccessioner \
-                           -DartifactId=somejar \
-                           -Dversion=1.0 \
-                           -DgeneratePom=true \
-                           -Dpackaging=jar \
-                           -Dfile=/local/path/to/somejar.jar \
-                           -DrepositoryId=da.repo \
-                           -Durl=scp://ssh.phx.nearlyfreespeech.net/home/public/maven2
-
-Some notes on deployment:
-
-* Use `org.dataaccessioner` as the groupID
-* If known, use the jar's version for the version;  if not known, use the 
-  version of the tool that requires this jar as a dependency (example:  a 
-  FITS main dependency would have the version 1.04, the DA FITS version)
-
-
-See https://maven.apache.org/guides/mini/guide-3rd-party-jars-remote.html 
-for more information.
+installs these jars to your repo from the FITS distribution.
 
 **Rebuilding DataAccessioner**:
 
@@ -136,7 +114,7 @@ The jar and distribution zip file will be placed in the `target/` subdirectory.
 
 ## Updating a Tool
 
-To update a specific FITS tool, follow this process:
+To update a specific tool distributed with FITS:
 
 First, update FITS alone and test:
 
@@ -152,52 +130,45 @@ First, update FITS alone and test:
 Then incorporate the new tool into Data Accessioner:
 
 *  Fork the DataAccessioner git repo, then check your fork out locally
-*  Update any needed config files in `src/main/resources/tools/` and
-   `src/main/resources/xml/`
-*  Update any changed XSLT files in `src/main/resources/xml/`
+*  Copy the updated jars to `fits/lib`
+*  Update any needed config files in `fits/tools/` and
+   `fits/xml/`
+*  Update any changed XSLT files in `fits/xml/`
 *  Look at the new jar files installed for the tool in the FITS `lib/`
    directory, then:
    *  Update the versions of any dependencies already declared in `pom.xml`
    *  Add new dependencies available in Maven Central Repository to the 
       section for the tool's dependencies in `pom.xml`
-   *  OR:  Upload any new dependencies to the Data Accessioner maven
-      repository and add the dependencies to `pom.xml`
+   *  OR:  Install any new dependencies to your local repository by adding the
+      local jars to install to the `maven-install-plugin` section in `pom.xml`, 
+      then re-run `mvn validate`.
 *  Build dataaccessioner and test
 *  Commit and push your changes to your forked git repository
-*  Submit a pull request to the `seth-shaw/dataaccessioner` repository
+*  Submit a pull request to the `DataAccessioner/DataAccessioner` repository
 
 ## Updating the DROID signature file
 
 This is simple, and does not need to be compiled into the code.  It can
 be updated on any installed instance of DataAccessioner.
 
-1.  Download the latest version of the signature file at 
-    https://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.htm
-2.  Copy it to `DATAACCESIONER_HOME/tools/droid/DROID_SignatureFile_V##.xml`, 
-    where `##` is the version number.
-3.  Edit the `DATAACCESIONER_HOME/tools/droid/DROID_config.xml` file, 
-    updating the `<SigFile>` and `<SigFileVersion>` elements.
+However, it does require downloading the source distribution of FITS from GitHub
+(https://github.com/harvard-lts/fits). The FITS build process downloads the
+Droid signature file and makes some changes to it. 
+
+TODO:  finish
 
 ## Updating FITS
 
-Updating FITS is basically the same process as updating any given 
-tool in FITS, with the following additions:
+Updating FITS is a simpler process:
 
-* Examine and update FITS core jar dependencies in `pom.xml`, also
-* Merge changes to the FITS config file `fits.xml` with the existing
-  Data Accessioner `fits.xml` file.  A few of the settings have been
-  changed from the defaults for DataAccessioner purposes.
-* Preserve the following files that are DataAccessioner-specific:
-
-      tools/log4j.properties
-      xml/metadataManager.xsl
-      xml/dda-1-1.xsd
-      
-## Other Approaches
-
-The current strategy of getting jars from Maven Central repository 
-where possible, and uploading the rest to dataccessioner.org where
-required, is time-consuming and can require many hours of detective
-work.  It may make more sense to simply copy all the jars in any given
-version of FITS wholesale up to the DataAccessioner maven repository,
-then refer to those dependencies only in the POM file.
+* Make a backup copy of the current `fits/` tree somewhere outside the 
+  DataAccessioner folder, for reference.
+* Delete the folder tree `fits/`.
+* Install the new FITS under `fits/`.
+* Examine and update FITS core jar dependency versions in `pom.xml`.
+* Update the versions of the local jars in `pom.xml`, and re-run
+  `mvn validate`.
+* Copy the `fits/log4j2.xml` file distributed with DataAccessioner
+  over the file distributed with FITS.
+* Rebuild DataAccessioner.
+* Run DataAccessioner and test that all the tools function normally.

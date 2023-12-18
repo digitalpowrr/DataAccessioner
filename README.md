@@ -97,7 +97,7 @@ of FITS was included.
 
 ## License
 
-Copyright © 2014, 2017 by Seth Shaw.
+Copyright © 2014, 2017, 2023 by Seth Shaw.
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
