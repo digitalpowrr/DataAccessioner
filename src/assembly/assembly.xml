@@ -39,7 +39,7 @@
       <fileMode>0755</fileMode>
     </file>
     <file>
-      <source>src/main/resources/README.md</source>
+      <source>README.md</source>
       <outputDirectory>.</outputDirectory>
     </file>
     <file>
