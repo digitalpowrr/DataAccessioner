@@ -7,4 +7,4 @@ then
     export FITS_HOME
 fi
 
-FITS_HOME="${FITS_HOME}" java -Dlog4j.configurationFile=da-log-config.xml -Xmx1024m -jar dataaccessioner.jar
+java -Dlog4j.configurationFile=da-log-config.xml -Xmx1024m -jar dataaccessioner.jar
