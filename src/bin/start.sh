@@ -3,7 +3,7 @@ cd "$(dirname "$0")" || exit
 
 if [ "X${FITS_HOME}" == "X" ]
 then
-    FITS_HOME="$(dirname "$0")"
+    FITS_HOME="$(dirname "$0")/fits"
     export FITS_HOME
 fi
 
