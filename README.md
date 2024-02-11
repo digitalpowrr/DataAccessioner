@@ -14,12 +14,17 @@ DataAccessioner 1.2 requires Java 11 or above.
 
 Jpylyzer requires Windows and Python.
 
-MediaInfo for Linux is installed for Ubuntu.  If you are running a
-different version of LInux and MediaInfo does not, work, see the FITS FAQ
-for more information on installing MediaInfo for other versions of Linux.
+### MediaInfo Notes
 
-https://projects.iq.harvard.edu/fits/fitsfaq
-
+The version of MediaInfo distributed with FITS for Linux is installed for 
+Ubuntu, and the version of MediaInfo distributed with FITS 1.6.0 for Windows will 
+not work in Windows 11. If you are running DataAccessioner on a platform that does
+not support the supplied version of MediaInfo, try installing MediaInfo directly on 
+your system and delete the copy in `fits/tools/mediainfo`. After deleting the 
+copy in FITS, FITS will then attempt to use the system copy.  This may not work,
+however, if the version of MediaInfo installed on your system is different from
+the one distributed with FITS.  You can see the version of MediaInfo distributed
+with FITS in the file `fits/tools/mediainfo/version`.
 
 ## Install
 
@@ -28,9 +33,18 @@ All dependencies are included within the package.
 
 ## Run
 
-Double-click the `dataaccessioner.jar` file in the install directory or 
-run `start.sh` (Mac and Linux) or `start.bat` (Windows) in the install 
-directory to launch the application.
+### Windows
+
+Double-click the `dataaccessioner.jar` file or `start.bat` in the install directory.
+
+### Mac or Linux
+
+Open a terminal application (Terminal in Mac), then run the following commands:
+
+    cd <DATAACCESSIONER_DIRECTORY>
+    ./start.sh
+
+Where *<DATAACCESSIONER_DIRECTORY>* is the folder where you installed DataAccessioner.
 
 ## For Developers
 
@@ -91,8 +105,8 @@ enhancements.
 
 Version 1.2 was made possible by Digital POWRR 
 (https://digitalpowrr.niu.edu). It was updated to clean up several
-security and deprecation vulnerabilities, and the most recent version
-of FITS was included.
+security and deprecation vulnerabilities, and update to the most recent 
+version of FITS.
 
 ## Credits
 
@@ -102,7 +116,8 @@ of FITS was included.
 
 ## License
 
-Copyright © 2014, 2017, 2023 by Seth Shaw.
+Copyright © 2024 by Digital POWRR.
+Copyright © 2014, 2017 by Seth Shaw.
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
