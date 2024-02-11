@@ -21,12 +21,16 @@ package org.dataaccessioner;
 import edu.harvard.hul.ois.fits.Fits;
 import edu.harvard.hul.ois.fits.exceptions.FitsException;
 import org.apache.commons.cli.*;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.openide.util.Exceptions;
 
 import javax.swing.*;
 import java.io.File;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +64,7 @@ public class DataAccessioner {
      * @param args the command line arguments
      * @throws org.apache.commons.cli.ParseException
      */
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, URISyntaxException {
         DataAccessioner da = new DataAccessioner();
         //Default settings
         String collectionName = "";
@@ -114,7 +118,14 @@ public class DataAccessioner {
 
         fitsHome = System.getProperty("fits.home");
         if (fitsHome == null) {
-            fitsHome="fits";
+            String jarPath = DataAccessioner.class
+                    .getProtectionDomain()
+                    .getCodeSource()
+                    .getLocation()
+                    .toURI()
+                    .getPath();
+            String path =  FilenameUtils.getPathNoEndSeparator(jarPath);
+            fitsHome = FilenameUtils.concat(path, "fits");
         }
         try {
             if (cmd.hasOption("x")) {
