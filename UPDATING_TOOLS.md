@@ -100,7 +100,7 @@ are not available from any public repository.  They are distributed with
 FITS itself.  The DataAccessioner POM has an `install` section to install
 these local jars to your local maven repository;  the command
 
-        mvn validate
+    mvn validate
 
 installs these jars to your repo from the FITS distribution.
 
@@ -148,18 +148,43 @@ Then incorporate the new tool into Data Accessioner:
 
 ## Updating the DROID signature file
 
-This is simple, and does not need to be compiled into the code.  It can
+Updating the DROID signature file does not require any source code modifications.  It can
 be updated on any installed instance of DataAccessioner.
 
 However, it does require downloading the source distribution of FITS from GitHub
 (https://github.com/harvard-lts/fits). The FITS build process downloads the
 Droid signature file and makes some changes to it. 
 
-TODO:  finish
+* Move the current DataAccessioner DROID signature files out of the way
+  (but save them in case you need to restore them).  `V###` and `YYYYMMDD`
+  should be replaced with the version number and date string in the file names.
+
+        mv fits/tools/DROID_SignatureFile_V###_Alt.xml fits/tools/DROID_SignatureFile_V###_Alt.xml.ORIG
+        mv fits/tools/DROID_SignatureFile_V###.xml fits/tools/DROID_SignatureFile_V###.xml.ORIG
+        mv fits/tools/container-signature-YYYYMMDD.xml fits/tools/container-signature-YYYYMMDD.xml.ORIG
+
+*  Check out the tagged version of FITS distributed with DataAccessioner from GitHub:
+   https://github.com/harvard-lts/fits
+   The version of FITS used in DataAccessioner is in the file `fits/version.properties`.
+
+*  Change into the fits repo directory, and run the maven command 
+   `mvn -P update-droid-sigs generate-resources`
+
+*  Copy the following generated files in the fits repo to the `fits/tools/droid` directory 
+   under your DataAccessioner directory:
+
+        tools/droid/container-signature-*.xml
+        tools/droid/DROID_SignatureFile_*.xml
+
+*  Edit the following lines in the DataAccessioner file `fits/xml/fits.xml` to update the 
+   Droid version. `V###` and `YYYYMMDD` should be replaced with the version number and 
+   date string in the new file names.
+
+        <!-- file name of the droid signature file to use in tools/droid/-->
+        <droid_sigfile>DROID_SignatureFile_V###_Alt.xml</droid_sigfile>
+        <droid_container_sigfile>container-signature-YYYYMMDD.xml</droid_container_sigfile>
 
 ## Updating FITS
-
-Updating FITS is a simpler process:
 
 * Make a backup copy of the current `fits/` tree somewhere outside the 
   DataAccessioner folder, for reference.
