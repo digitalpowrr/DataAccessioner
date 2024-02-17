@@ -26,6 +26,11 @@ however, if the version of MediaInfo installed on your system is different from
 the one distributed with FITS.  You can see the version of MediaInfo distributed
 with FITS in the file `fits/tools/mediainfo/version`.
 
+## Download
+
+You can download the latest release from the Github repository
+at https://github.com/digitalpowrr/DataAccessioner/releases/
+
 ## Install
 
 Unzip the distribution zip file in the location of your choice.
