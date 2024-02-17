@@ -5,11 +5,11 @@
   <groupId>org.dataaccessioner</groupId>
   <artifactId>dataaccessioner</artifactId>
   <packaging>jar</packaging>
-  <version>1.2-SNAPSHOT</version>
+  <version>1.2</version>
 
   <name>dataaccessioner</name>
   <description>Java GUI application to migrate, analyze, and generate metadata from raw files for the purposes of digital preservation</description>
-  <url>https://github.com/DataAccessioner/DataAccessioner</url>
+  <url>https://github.com/digitalpowrr/DataAccessioner</url>
   <organization>
     <name>DataAccessioner</name>
   </organization>
@@ -29,9 +29,9 @@
   </developers>
 
   <scm>
-    <url>https://github.com/DataAccessioner/DataAccessioner</url>
-    <connection>scm:git:git://github.com/DataAccessioner/dataaccessioner.git</connection>
-    <developerConnection>scm:git:git@github.com:DataAccessioner/dataaccessioner.git</developerConnection>
+    <url>https://github.com/digitalpowrr/DataAccessioner</url>
+    <connection>scm:git:git://github.com/digitalpowrr/dataaccessioner.git</connection>
+    <developerConnection>scm:git:git@github.com:digitalpowrr/dataaccessioner.git</developerConnection>
   </scm>
 
   <properties>

@@ -43,7 +43,7 @@ import java.util.Set;
 public class DataAccessioner {
 
     private static final String NAME = "DataAccessioner";
-    private static final String VERSION = "1.2-SNAPSHOT";
+    private static final String VERSION = "1.2";
     private static Logger logger;
     private static String fitsHome;
 

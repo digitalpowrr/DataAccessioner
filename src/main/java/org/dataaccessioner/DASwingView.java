@@ -1213,7 +1213,7 @@ public class DASwingView extends javax.swing.JFrame {
 
         //devVal.setText("Seth Shaw");
 
-        urlVal.setText("https://github.com/DataAccessioner/DataAccessioner");
+        urlVal.setText("https://github.com/digitalpowrr/DataAccessioner");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
