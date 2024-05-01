@@ -10,7 +10,8 @@ It provides a wrapper around the FITS toolkit
 metadata tools to analyze and describe found content at the time 
 of migration.
 
-DataAccessioner 1.2 requires Java 11 or above.
+DataAccessioner 1.2 requires Java 11 or above. We recommend using Adoptium, an open source Java SE build based upon OpenJDK:
+https://adoptium.net/temurin/releases/?version=11
 
 Jpylyzer requires Windows and Python.
 
