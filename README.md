@@ -52,7 +52,7 @@ Open a terminal application (Terminal in Mac), then run the following commands:
 
 Where *<DATAACCESSIONER_DIRECTORY>* is the folder where you installed DataAccessioner.
 
-If you are unfamiliar with using the Terminal to launch programs, please see this [step-by-step guide] (<https://drive.google.com/file/d/1QOkTtuQIeI3nbJq-5NlDbdpfN442UZ-n/view?usp=drive_link>) to walk you through the process.
+If you are unfamiliar with using the Terminal to launch programs, please see this [step-by-step guide] (https://drive.google.com/file/d/1QOkTtuQIeI3nbJq-5NlDbdpfN442UZ-n/view?usp=drive_link) to walk you through the process.
 
 ## For Developers
 
